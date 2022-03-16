@@ -26,7 +26,7 @@ while True:
         break
 time.sleep(3)
 ss = driver.page_source
-soup=BeautifulSoup(ss,'html.parser') 
+soups=BeautifulSoup(ss,'html.parser') 
 time.sleep(1)
 
 DATE=[]
@@ -40,6 +40,10 @@ AWAY_WIN=[]
 HOME_KICK_SCORE=[]
 AWAY_KICK_SCORE=[]
 
+links=[]
+for soup in soups:
+    links.append('https://kickoff.ai'+soup.findAll('a')[0].get('href'))
+ 
 for link in links:
     soup = BeautifulSoup(urlopen(link),'html.parser')
     DATE.append(soup.find('div',{"class":"match-time"}).text.strip()) # DATE
